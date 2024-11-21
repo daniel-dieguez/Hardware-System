@@ -13,5 +13,6 @@ public class Categorias
  [Column("categoria_producto")]
  public string categoria_producto { get; set; }
 
- [JsonIgnore] public List<Productos> ProductosList { get; set; } = new List<Productos>();
+ [JsonIgnore] 
+ public List<Productos> ProductosList { get; set; } = new List<Productos>();
 }

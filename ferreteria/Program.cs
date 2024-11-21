@@ -15,6 +15,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(o =>
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 // Agregar servicios de autorización
 builder.Services.AddAuthorization();
 
@@ -35,6 +47,9 @@ app.UseRouting();
 
 app.UseAuthentication(); // Si estás usando autenticación, asegúrate de tener esto
 app.UseAuthorization();  // Aquí agregas el middleware de autorizaciónx
+
+//cors
+app.UseCors("AllowReactApp");
 
 app.MapControllers();
 
